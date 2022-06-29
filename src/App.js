@@ -7,8 +7,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main/>} />
-        <Route path="/history" element={<History />} />
+        <Route path="dictionary-app/" element={<Main/>} />
+        <Route path="dictionary-app/history" element={<History />} />
       </Routes>
     </Router>
   );
