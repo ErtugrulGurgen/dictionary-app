@@ -12,11 +12,19 @@ const RandomWord = ({word}) => {
         margin: "auto",
         backgroundColor: "wheat",
         borderRadius: "10px",
-        position: "relative",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
         <div>
           <CardContent>
+          <Typography
+              sx={{ fontSize: 32}}
+              color="text.secondary"
+              gutterBottom
+            >
+              Word of the day!
+            </Typography>
             <Typography
               sx={{ fontSize: 14 }}
               color="text.secondary"

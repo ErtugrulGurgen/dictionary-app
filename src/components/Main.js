@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import RandomWord from "./RandomWord";
 import WordCard from "./WordCard";
 
 const Main = () => {
@@ -10,7 +11,7 @@ const Main = () => {
   const [result, setResult] = useState();
   const [word, setWord] = useState("");
   const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${query}`;
-  const randomWordApi = "https://random-word-form.herokuapp.com/random/noun"
+  const randomWordApi = "https://random-word-form.herokuapp.com/random/noun";
 
   const getData = async () => {
     try {
@@ -18,23 +19,23 @@ const Main = () => {
       setResult(data.data);
       console.log(result);
     } catch (err) {
+      alert(err.response.data.message);
+    }
+  };
+
+  const getRandomWord = async () => {
+    try {
+      const randomWord = await axios.get(randomWordApi);
+      setWord(randomWord.data);
+      console.log(word);
+    } catch (err) {
       console.log(err);
     }
   };
 
-  // const getRandomWord = async () => {
-  //   try {
-  //     const randomWord = await axios.get(randomWordApi);
-  //     setWord(randomWord.data);
-  //     console.log(word);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //  setTimeout(()=> getRandomWord(), 5000) },
-  //    []);
+  useEffect(() => {
+    getRandomWord();
+  }, []);
 
   const handleSubmit = () => {
     if (query) {
@@ -64,6 +65,7 @@ const Main = () => {
           label="Enter a word"
           id="word"
           onChange={(e) => setQuery(e.target.value)}
+          value={query}
           onKeyPress={(e) => (e.key === "Enter" ? handleSubmit() : null)}
         />
         <Button variant="contained" color="primary" onClick={handleSubmit}>
@@ -71,16 +73,20 @@ const Main = () => {
         </Button>
       </Box>
       <div style={{ display: "flex" }}>
-        {result?.map((item, index) =>
-          item.word === query.toLowerCase() ? (
-            <WordCard
-              key={index}
-              word={item.word}
-              fl={item.meanings[0].partOfSpeech}
-              def={item.meanings[0].definitions[0].definition}
-              synonyms={item.meanings[0].synonyms}
-            />
-          ) : null
+        {result ? (
+          result?.map((item, index) =>
+            item.word === query.toLowerCase() ? (
+              <WordCard
+                key={index}
+                word={item.word}
+                fl={item.meanings[0].partOfSpeech}
+                def={item.meanings[0].definitions[0].definition}
+                synonyms={item.meanings[0].synonyms}
+              />
+            ) : null
+          )
+        ) : (
+          <RandomWord word={word} />
         )}
       </div>
     </div>

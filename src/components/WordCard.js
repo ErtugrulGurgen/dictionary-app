@@ -9,8 +9,6 @@ export default function WordCard({ word, fl, def, synonyms }) {
   const [showSynonyms, setShowSynonyms] = React.useState(true);
   const handleClick = () => {
     setShowSynonyms(!showSynonyms);
-    console.log(showSynonyms);
-    console.log(synonyms);
   };
   return (
     <Card
@@ -61,7 +59,7 @@ export default function WordCard({ word, fl, def, synonyms }) {
               >
                 {synonyms?.map((item, index) => (
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    - {item}
+                   {item}
                   </Typography>
                 ))}
               </Typography>
@@ -72,8 +70,9 @@ export default function WordCard({ word, fl, def, synonyms }) {
                 sx={{ fontSize: 14, display: "space-between" }}
                 color="text.secondary"
                 gutterBottom
+                component={'span'}
               >
-                <Typography sx={{ mb: "10px" }} color="text.secondary">
+                <Typography sx={{ mb: "10px" }} color="text.secondary" component={'span'}>
                   No synonyms found.
                 </Typography>
               </Typography>
