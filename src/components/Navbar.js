@@ -19,8 +19,21 @@ export default function Navbar() {
               fontFamily: "Abril Fatface cursive",
             }}
           >
-            <MenuBookIcon sx={{ fontSize: "40px", marginBottom:"-5px", marginRight:"10px"}} /> Dictionary App{" "}
-            <MenuBookIcon sx={{ fontSize: "40px", marginBottom:"-5px", marginLeft:"10px"}} />
+            <MenuBookIcon
+              sx={{
+                fontSize: "40px",
+                marginBottom: "-5px",
+                marginRight: "10px",
+              }}
+            />{" "}
+            Dictionary App{" "}
+            <MenuBookIcon
+              sx={{
+                fontSize: "40px",
+                marginBottom: "-5px",
+                marginLeft: "10px",
+              }}
+            />
           </Typography>
         </Toolbar>
       </AppBar>

@@ -59,7 +59,7 @@ export default function WordCard({ word, fl, def, synonyms }) {
               >
                 {synonyms?.map((item, index) => (
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                   {item}
+                    {item}
                   </Typography>
                 ))}
               </Typography>
@@ -70,9 +70,13 @@ export default function WordCard({ word, fl, def, synonyms }) {
                 sx={{ fontSize: 14, display: "space-between" }}
                 color="text.secondary"
                 gutterBottom
-                component={'span'}
+                component={"span"}
               >
-                <Typography sx={{ mb: "10px" }} color="text.secondary" component={'span'}>
+                <Typography
+                  sx={{ mb: "10px" }}
+                  color="text.secondary"
+                  component={"span"}
+                >
                   No synonyms found.
                 </Typography>
               </Typography>
