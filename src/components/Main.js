@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import RandomWord from "./RandomWord";
 import WordCard from "./WordCard";
 
 const Main = () => {
@@ -23,19 +22,19 @@ const Main = () => {
     }
   };
 
-  const getRandomWord = async () => {
-    try {
-      const randomWord = await axios.get(randomWordApi);
-      setWord(randomWord.data);
-      console.log(word);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // const getRandomWord = async () => {
+  //   try {
+  //     const randomWord = await axios.get(randomWordApi);
+  //     setWord(randomWord.data);
+  //     console.log(word);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-  useEffect(() => {
-   setTimeout(()=> getRandomWord(), 5000) },
-     []);
+  // useEffect(() => {
+  //  setTimeout(()=> getRandomWord(), 5000) },
+  //    []);
 
   const handleSubmit = () => {
     if (query) {
@@ -81,9 +80,7 @@ const Main = () => {
               def={item.meanings[0].definitions[0].definition}
               synonyms={item.meanings[0].synonyms}
             />
-          ) : <RandomWord 
-          word={word}
-          />
+          ) : null
         )}
       </div>
     </div>
