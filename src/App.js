@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
-import Details from './components/Details';
+import History from './components/History';
 import Main from './components/Main';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Main/>} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </Router>
   );
