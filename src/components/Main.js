@@ -10,6 +10,7 @@ const Main = () => {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState();
   const [word, setWord] = useState("");
+  const [randomResult, setRandomResult] = useState();
   const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${query}`;
   const randomWordApi = "https://random-word-form.herokuapp.com/random/noun";
 
@@ -23,18 +24,42 @@ const Main = () => {
     }
   };
 
-  const getRandomWord = async () => {
-    try {
-      const randomWord = await axios.get(randomWordApi);
-      setWord(randomWord.data);
-      console.log(word);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getRandomWord = async () => {
+  //   try {
+  //     const randomWord = await axios.get(randomWordApi);
+  //     setWord(randomWord.data[0]);
+  //     console.log(word);
+  //   }
+  //     catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const getRandomWordData = async () => {
+  //   try {
+  //     const randomWordData = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  //     setRandomResult(randomWordData.data);
+  //     console.log(randomResult);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   useEffect(() => {
-    getRandomWord();
+    axios
+      .get(randomWordApi)
+      .then((res) => {
+        const data = res.data[0];
+        setWord(res.data[0]);
+        return data;
+      })
+      .then((res) =>
+        axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${res}`)
+      )
+      .then((response) => {
+        setRandomResult(response.data);
+        console.log(response.data);
+      });
   }, []);
 
   const handleSubmit = () => {
@@ -67,7 +92,8 @@ const Main = () => {
           onChange={(e) => setQuery(e.target.value)}
           value={query}
           onKeyPress={(e) => (e.key === "Enter" ? handleSubmit() : null)}
-        />
+          />
+       
         <Button variant="contained" color="primary" onClick={handleSubmit}>
           Search
         </Button>
@@ -86,7 +112,22 @@ const Main = () => {
             ) : null
           )
         ) : (
-          <RandomWord word={word} />
+          <>
+            {randomResult === undefined ? (
+              <h5>Loading...</h5>
+            ) : (
+              randomResult?.map((item, index) =>
+                item.word === word ? (
+                  <RandomWord
+                    key={index}
+                    word={word}
+                    randomDef={item.meanings[0].definitions[0].definition}
+                    randomFl={item.meanings[0].partOfSpeech}
+                  />
+                ) : null
+              )
+            )}
+          </>
         )}
       </div>
     </div>

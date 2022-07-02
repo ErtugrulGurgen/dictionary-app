@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 
-const RandomWord = ({ word }) => {
+const RandomWord = ({ word, randomDef, randomFl }) => {
   return (
     <Card
       sx={{
@@ -24,6 +24,14 @@ const RandomWord = ({ word }) => {
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {word}
           </Typography>
+          <Typography variant="h5" component="div"></Typography>
+            <Typography sx={{ mb: "5px" }} color="text.secondary">
+            {randomFl}
+            </Typography>
+            <Typography variant="body2">
+            {randomDef}
+            <br />
+            </Typography>
         </CardContent>
       </div>
     </Card>

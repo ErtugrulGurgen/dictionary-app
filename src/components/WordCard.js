@@ -18,7 +18,7 @@ export default function WordCard({ word, fl, def, synonyms }) {
         minHeight: 300,
         maxHeight: 300,
         margin: "auto",
-        backgroundColor: "wheat",
+        backgroundColor: "#F1F1E6",
         borderRadius: "10px",
         position: "relative",
       }}
